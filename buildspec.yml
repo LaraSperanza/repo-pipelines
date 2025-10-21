@@ -15,7 +15,7 @@ phases:
     commands:
       # Crea el paquete de despliegue (ZIP)
       - echo Packaging deployment file...
-      - zip -r deploy_package.zip .
+      - zip -r deploy_package.zip lambda_function.py
 
 artifacts:
   files:
