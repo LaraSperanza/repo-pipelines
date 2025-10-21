@@ -9,15 +9,15 @@ phases:
       
   build:
     commands:
-      - echo "Listado de archivos en CodeBuild"
-      - ls -l
-      
-      # 1. Asegúrate de que el archivo existe en este listado. Si no existe, es la Hipótesis 1.
-
       - echo Packaging deployment file...
-      # 2. Comando más robusto, incluyendo la función y el ZIP en la misma línea
-      - zip deploy_package.zip lambda_function.py
-      # Nota: Usamos 'zip' simple, que es más seguro que 'zip -r' para archivos únicos
+  
+  post_build:
+    commands:
+      - mkdir temp_zip
+      - cp lambda_function.py temp_zip/
+      - cd temp_zip
+      - zip -r ../deploy_package.zip .
+      - cd ..
 
 artifacts:
   files:
