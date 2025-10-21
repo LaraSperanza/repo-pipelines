@@ -3,23 +3,18 @@ version: 0.2
 phases:
   install:
     commands:
-      # Opcional: solo para depuración, muestra dónde se ejecuta CodeBuild
-      - pwd
+      # Opcional: solo para debugging
       - ls -l 
       
   build:
     commands:
-      - echo Packaging deployment file...
-  
-  post_build:
-    commands:
-      - mkdir temp_zip
-      - cp lambda_function.py temp_zip/
-      - cd temp_zip
-      - zip -r ../deploy_package.zip .
-      - cd ..
+      # No hay comandos de compresión (zip) aquí.
+      - echo "Preparando archivos para el artefacto..."
 
 artifacts:
+  # ATENCIÓN: El artefacto de salida de CodeBuild se llamará "lambda_function.py"
+  # CodePipeline lo empaquetará automáticamente como un ZIP (BuildArtifact.zip)
+  # que contendrá SÓLO este archivo en su raíz.
   files:
-    - deploy_package.zip
+    - lambda_function.py  # Especificamos solo el archivo de código
   discard-paths: no
