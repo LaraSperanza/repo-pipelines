@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    # Comandos para instalar dependencias si usas librerías adicionales
+    # Por ejemplo:
+    # commands:
+    #   - pip install -r requirements.txt -t .
+    discard-paths: yes # No necesitas este si tienes un requirements.txt
+  build:
+    commands:
+      # CodeBuild ejecutará el código de la Lambda, pero en este caso solo lo empaquetaremos
+      - echo Build started on `date`
+  post_build:
+    commands:
+      # Crea el paquete de despliegue (ZIP)
+      - echo Packaging deployment file...
+      - zip -r deploy_package.zip .
+
+artifacts:
+  files:
+    # Define qué archivos se pasarán a la siguiente etapa (Deploy)
+    - deploy_package.zip
+  discard-paths: no # Conservar la estructura de archivos dentro del zip
