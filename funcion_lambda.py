@@ -1,0 +1,11 @@
+import json
+
+def lambda_handler(event, context):
+    print("Iniciando la función hello-world-demo...")
+    
+    message = "¡Hola desde la función hello-world-demo! Versión inicial (v1.0)"
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps(message)
+    }
