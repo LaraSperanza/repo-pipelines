@@ -8,13 +8,10 @@ phases:
       
   build:
     commands:
-      # No hay comandos de compresión (zip) aquí.
       - echo "Preparando archivos para el artefacto..."
 
 artifacts:
-  # ATENCIÓN: El artefacto de salida de CodeBuild se llamará "lambda_function.py"
-  # CodePipeline lo empaquetará automáticamente como un ZIP (BuildArtifact.zip)
-  # que contendrá SÓLO este archivo en su raíz.
+  #El artefacto de salida de CodeBuild se llamará "lambda_function.py"
   files:
     - lambda_function.py  # Especificamos solo el archivo de código
   discard-paths: no
